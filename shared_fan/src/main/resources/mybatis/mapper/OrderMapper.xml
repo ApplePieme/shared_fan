@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.applepieme.mapper.OrderMapper">
+    <insert id="addOrder" parameterType="com.applepieme.pojo.Order">
+        insert into `order` (order_id, fan_id, user_id, begin_time, end_time, sum, create_time)
+        values (#{orderId,jdbcType=VARCHAR}, #{fanId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+                #{beginTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP}, #{sum,jdbcType=DOUBLE}, now())
+    </insert>
+
+    <select id="findOrderByUserId" parameterType="string" resultType="com.applepieme.pojo.Order">
+        select order_id, `order`.fan_id, user_id, begin_time, end_time, sum, `order`.create_time, location
+        from `order`, fan
+        where fan.fan_id = `order`.fan_id and `order`.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+</mapper>

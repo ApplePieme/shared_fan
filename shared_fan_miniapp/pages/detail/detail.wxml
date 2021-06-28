@@ -1,0 +1,25 @@
+<!-- pages/detail/detail.wxml -->
+<view class="main">
+    <view class="info_box">
+        <view hidden="{{isUse}}">
+            <view class="info_item">
+                <text class="info_title">小风扇位置</text>
+                <text class="info">{{fanInfo.location}}</text>
+            </view>
+            <view class="info_item">
+                <text class="info_title">价格</text>
+                <text class="info">{{fanInfo.price}}元/小时</text>
+            </view>
+            <view class="info_item">
+                <text class="info_title">上次使用</text>
+                <text class="info">{{fanInfo.updateTime}}</text>
+            </view>
+            <button class="btn" type="primary" bindtap="beginOrder">马上使用</button>
+        </view>
+        <view hidden="{{!isUse}}">
+            <view class="show_time_title">使用时间</view>
+            <view class="show_time">{{timecount}}</view>
+            <button class="btn" type="warn" bindtap="endOrder">停止使用</button>
+        </view>
+    </view>
+</view>

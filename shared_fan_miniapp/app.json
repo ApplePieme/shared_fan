@@ -1,0 +1,30 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/order/order",
+    "pages/info/info",
+    "pages/detail/detail",
+    "pages/register/register",
+    "pages/login/login",
+    "pages/recharge/recharge"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#34ebc3",
+    "navigationBarTitleText": "共享小风扇",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {"pagePath": "pages/index/index", "text": "扫码使用", "iconPath": "./icons/scan.png", "selectedIconPath": "./icons/scan_active.png"},
+      {"pagePath": "pages/order/order", "text": "我的订单", "iconPath": "./icons/order.png", "selectedIconPath": "./icons/order_active.png"},
+      {"pagePath": "pages/info/info", "text": "我的信息", "iconPath": "./icons/info.png", "selectedIconPath": "./icons/info_active.png"}
+    ],
+    "backgroundColor": "#34ebc3",
+    "borderStyle": "white",
+    "color": "#000",
+    "selectedColor": "#fff"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

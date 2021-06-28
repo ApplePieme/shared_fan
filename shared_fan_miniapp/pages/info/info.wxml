@@ -1,0 +1,27 @@
+<!-- pages/info/info.wxml -->
+<view class="main">
+    <view hidden="{{isLogin}}">
+        <button class="btn" type="primary" bindtap="register">注册</button>
+        <button class="btn" type="primary" bindtap="login">登录</button>
+    </view>
+    <view class="info_box" hidden="{{!isLogin}}">
+        <view class="info_item">
+            <text class="info_title">用户名</text>
+            <text class="info">{{userInfo.username}}</text>
+        </view>
+        <view class="info_item">
+            <text class="info_title">手机号码</text>
+            <text class="info">{{userInfo.phone}}</text>
+        </view>
+        <view class="info_item">
+            <text class="info_title">账户余额({{userInfo.updateTime}}充值)</text>
+            <text class="info">{{userInfo.assets}}元</text>
+        </view>
+        <view class="info_item">
+            <text class="info_title">注册时间</text>
+            <text class="info">{{userInfo.createTime}}</text>
+        </view>
+        <button class="btn" type="primary" bindtap="recharge">充值</button>
+        <button class="btn" type="warn" bindtap="logout">注销</button>
+    </view>
+</view>

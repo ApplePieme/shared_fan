@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.applepieme.mapper.FanMapper">
+    <select id="findFanById" parameterType="string" resultType="com.applepieme.pojo.Fan">
+        select fan_id, location, price, create_time, update_time
+        from fan
+        where fan_id = #{fanId,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="addFan" parameterType="com.applepieme.pojo.Fan">
+        insert into fan (fan_id, location, price, create_time, update_time)
+        values (#{fanId,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR},
+                #{price,jdbcType=DOUBLE}, now(), now())
+    </insert>
+</mapper>

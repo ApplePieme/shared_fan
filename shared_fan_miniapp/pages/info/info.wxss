@@ -1,0 +1,28 @@
+/* pages/info/info.wxss */
+.main{
+    display: flex;
+    justify-content: center;
+}
+.info_box{
+    width: 600rpx;
+    height: 800rpx;
+    background-color: #34ebc3;
+    border-radius: 20rpx;
+    margin-top: 20%;
+    padding: 20rpx;
+}
+.info_box .info_item{
+    width: 95%;
+    padding: 10rpx;
+    margin-top: 20rpx;
+    border-bottom: #fff solid 1rpx;
+}
+.info_box .info_item .info_title{
+    display: block;
+}
+.info_box .info_item .info{
+    color: #666;
+}
+.btn{
+    margin-top: 35rpx;
+}

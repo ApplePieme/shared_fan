@@ -1,0 +1,26 @@
+/* pages/order/order.wxss */
+.main{
+    display: block;
+    justify-content: center;
+}
+.order_wrap{
+    width: 600rpx;
+    height: 600rpx;
+    background-color: #34ebc3;
+    border-radius: 20rpx;
+    margin-top: 30rpx;
+    margin-left: 55rpx;
+    padding: 20rpx;
+}
+.order_wrap .order_item{
+    width: 95%;
+    padding: 10rpx;
+    margin-top: 20rpx;
+    border-bottom: #fff solid 1rpx;
+}
+.order_wrap .order_item .order_title{
+    display: block;
+}
+.order_wrap .order_item .order{
+    color: #666;
+}

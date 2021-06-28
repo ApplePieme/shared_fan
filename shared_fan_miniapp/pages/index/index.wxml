@@ -1,0 +1,7 @@
+<!-- index.wxml -->
+<view class="main">
+    <view class="btn" bindtap="findFan">
+        <image src="../../icons/scan_active.png" mode="widthFix" />
+        <text>扫一扫使用小风扇</text>
+    </view>
+</view>
