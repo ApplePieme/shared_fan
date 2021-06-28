@@ -24,3 +24,13 @@
 .order_wrap .order_item .order{
     color: #666;
 }
+.no_login{
+    display: block;
+    text-align: center;
+}
+.no_login .no_login_msg{
+    font-size: 38rpx;
+}
+.without_data{
+    text-align: center;
+}

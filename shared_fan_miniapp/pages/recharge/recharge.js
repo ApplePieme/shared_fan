@@ -1,3 +1,5 @@
+const { wxRequest } = require("../../utils/util")
+
 // pages/recharge/recharge.js
 Page({
 
@@ -12,27 +14,23 @@ Page({
     wx.getStorage({
       key: 'userId',
       success(res) {
-        wx.request({
-          url: 'http://localhost:8080/fan-api/user/add-assets',
-          data: {
-            userId: res.data,
-            value: e.detail.value.value
-          },
-          success(res) {
-            if (res.data.code !== 1000) {
-              return wx.showToast({
-                title: '充值失败'
-              })
-            }
-            wx.showToast({
-              title: '充值成功',
-              success() {
-                wx.reLaunch({
-                  url: '../info/info'
-                })
-              }
+        wxRequest('user/add-assets', {
+          userId: res.data,
+          value: e.detail.value.value
+        }, (res) => {
+          if (res.data.code !== 1000) {
+            return wx.showToast({
+              title: '充值失败'
             })
           }
+          wx.showToast({
+            title: '充值成功',
+            success() {
+              wx.reLaunch({
+                url: '../info/info'
+              })
+            }
+          })
         })
       }
     })

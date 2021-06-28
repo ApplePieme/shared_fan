@@ -2,6 +2,8 @@ package com.applepieme.service;
 
 import com.applepieme.pojo.User;
 
+import java.util.Map;
+
 /**
  * 用户 service 接口
  *
@@ -19,14 +21,14 @@ public interface UserService {
 
     /**
      * 用户登录
-     * 如果用户名和密码正确，返回该用户信息
+     * 如果用户名和密码正确，返回该用户信息和 token
      * 如果不正确，返回一个空的用户
      *
      * @param username 用户名
      * @param password 密码
      * @return User
      */
-    User userLogin(String username, String password);
+    Map<String, Object> userLogin(String username, String password);
 
     /**
      * 账户充值

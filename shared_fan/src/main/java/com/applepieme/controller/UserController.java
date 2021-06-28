@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
+
 /**
  * 用户 controller
  *
@@ -33,16 +37,25 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public AjaxResult<Object> userLogin(String username, String password) {
-        User user = userService.userLogin(username, password);
-        if (user != null) {
-            return ResponseUtil.success(user);
+    public AjaxResult<Object> userLogin(String username, String password, HttpServletRequest request) {
+        Map<String, Object> map = userService.userLogin(username, password);
+        HttpSession session = request.getSession();
+        session.setAttribute("token", map.get("token"));
+        map.put("sessionId", session.getId());
+        if (map.get("user") != null) {
+            return ResponseUtil.success(map);
         }
         return ResponseUtil.failed();
     }
 
     @RequestMapping("/add-assets")
     public AjaxResult<Object> addAssets(String userId, Double value) {
+        if (value == null) {
+            return ResponseUtil.failed();
+        }
+        if (value <= 0) {
+            return ResponseUtil.failed();
+        }
         if (userService.addAssets(userId, value) > 0) {
             User user = userService.findUser(userId);
             return ResponseUtil.success(user);

@@ -1,3 +1,5 @@
+const { wxRequest } = require("../../utils/util")
+
 // pages/login/login.js
 Page({
 
@@ -9,31 +11,35 @@ Page({
   },
 
   formSubmit: function (e) {
-    wx.request({
-      url: 'http://localhost:8080/fan-api/user/login',
-      data: {
-        username: e.detail.value.username,
-        password: e.detail.value.password
-      },
-      success(res) {
-        if (res.data.code !== 1000) {
-          return wx.showToast({
-            title: '登录失败'
-          })
-        }
-        wx.showToast({
-          title: '登陆成功',
-          success() {
-            wx.setStorage({
-              key: 'userId',
-              data: res.data.data.userId
-            })
-            wx.reLaunch({
-              url: '../info/info'
-            })
-          }
+    wxRequest('user/login', {
+      username: e.detail.value.username,
+      password: e.detail.value.password
+    }, (res) => {
+      if (res.data.code !== 1000) {
+        return wx.showToast({
+          title: '登录失败'
         })
       }
+      wx.showToast({
+        title: '登陆成功',
+        success() {
+          wx.setStorage({
+            key: 'userId',
+            data: res.data.data.user.userId
+          })
+          wx.setStorage({
+            key: 'token',
+            data: res.data.data.token
+          })
+          wx.setStorage({
+            key: 'sessionId',
+            data: res.data.data.sessionId
+          })
+          wx.reLaunch({
+            url: '../info/info'
+          })
+        }
+      })
     })
   },
 

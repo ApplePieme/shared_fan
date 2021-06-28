@@ -1,3 +1,5 @@
+const { wxRequest } = require("../../utils/util")
+
 // index.js
 Page({
 
@@ -9,21 +11,27 @@ Page({
   },
 
   findFan: function () {
-    wx.scanCode({
-      success(res) {
-        wx.request({
-          url: 'http://localhost:8080/fan-api/fan/info',
-          data: {
-            fanId: res.result
-          },
+    wx.getStorage({
+      key: 'userId',
+      success() {
+        wx.scanCode({
           success(res) {
-            wx.navigateTo({
-              url: '../detail/detail',
-              success: function (e) {
-                e.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.data })
+            wxRequest(
+              'fan/info', { fanId: res.result }, (res) => {
+                wx.navigateTo({
+                  url: '../detail/detail',
+                  success: function (e) {
+                    e.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.data })
+                  }
+                })
               }
-            })
+            )
           }
+        })
+      },
+      fail() {
+        wx.showToast({
+          title: '请先登录'
         })
       }
     })

@@ -1,6 +1,6 @@
 <!-- pages/order/order.wxml -->
 <view class="main">
-    <view class="order_wrap" wx:for="{{orderList}}" wx:key="{{index}}">
+    <view class="order_wrap" wx:for="{{orderList}}" wx:key="{{index}}" hidden="{{!isLogin}}">
         <view class="order_item">
             <text class="order_title">使用位置</text>
             <text class="order">{{item.location}}</text>
@@ -17,5 +17,13 @@
             <text class="order_title">订单总额</text>
             <text class="order">{{item.sum}}元</text>
         </view>
+    </view>
+    <view class="no_login" hidden="{{isLogin}}">
+        <image src="../../icons/no_login.png" />
+        <view class="no_login_msg">您还未登录哦~</view>
+        <view class="no_login_msg">登录后再来吧！</view>
+    </view>
+    <view class="without_data" hidden="{{orderList.length>0?true:false|!isLogin}}">
+        <image src="../../icons/without_data.png" mode="widthFix" />
     </view>
 </view>

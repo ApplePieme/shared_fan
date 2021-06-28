@@ -58,4 +58,12 @@ public interface UserMapper {
      * @return Integer
      */
     Integer updateAssets(@Param("userId") String userId,@Param("value") Double value);
+
+    /**
+     * 根据 用户名查找用户
+     *
+     * @param username 用户名
+     * @return User
+     */
+    User findUserByUsername(@Param("username") String username);
 }

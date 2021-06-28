@@ -1,3 +1,5 @@
+const { wxRequest } = require("../../utils/util")
+
 // pages/register/register.js
 Page({
 
@@ -16,28 +18,24 @@ Page({
         title: '两次密码不相同'
       })
     }
-    wx.request({
-      url: 'http://localhost:8080/fan-api/user/register',
-      data: {
-        username: e.detail.value.username,
-        password: e.detail.value.password,
-        phone: e.detail.value.phone
-      },
-      success(res) {
-        if (res.data.code !== 1000) {
-          return wx.showToast({
-            title: '注册失败'
-          })
-        }
-        wx.showToast({
-          title: '注册成功',
-          success() {
-            wx.navigateTo({
-              url: '../login/login'
-            })
-          }
+    wxRequest('user/register', {
+      username: e.detail.value.username,
+      password: e.detail.value.password,
+      phone: e.detail.value.phone
+    }, (res) => {
+      if (res.data.code !== 1000) {
+        return wx.showToast({
+          title: '注册失败'
         })
       }
+      wx.showToast({
+        title: '注册成功',
+        success() {
+          wx.navigateTo({
+            url: '../login/login'
+          })
+        }
+      })
     })
   },
 

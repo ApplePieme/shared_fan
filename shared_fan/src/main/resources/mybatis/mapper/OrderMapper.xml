@@ -11,5 +11,6 @@
         select order_id, `order`.fan_id, user_id, begin_time, end_time, sum, `order`.create_time, location
         from `order`, fan
         where fan.fan_id = `order`.fan_id and `order`.user_id = #{userId,jdbcType=VARCHAR}
+        order by end_time desc
     </select>
 </mapper>

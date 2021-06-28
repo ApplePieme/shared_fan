@@ -1,3 +1,5 @@
+const { wxRequest } = require("../../utils/util")
+
 // pages/order/order.js
 Page({
 
@@ -5,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    orderList: []
+    orderList: [],
+    isLogin: false
   },
 
   getOrderList() {
@@ -13,16 +16,16 @@ Page({
     wx.getStorage({
       key: 'userId',
       success(res) {
-        wx.request({
-          url: 'http://localhost:8080/fan-api/order/list',
-          data: {
-            userId: res.data
-          },
-          success(res) {
-            that.setData({
-              orderList: res.data.data
-            })
-          }
+        wxRequest('order/list', { userId: res.data }, (res) => {
+          that.setData({
+            isLogin: true,
+            orderList: res.data.data
+          })
+        })
+      },
+      fail() {
+        that.setData({
+          isLogin: false
         })
       }
     })
@@ -32,7 +35,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getOrderList()
+
   },
 
   /**
@@ -46,7 +49,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getOrderList()
   },
 
   /**

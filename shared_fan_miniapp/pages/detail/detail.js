@@ -1,3 +1,5 @@
+const { wxRequest } = require("../../utils/util");
+
 // pages/detail/detail.js
 var intt;
 Page({
@@ -12,7 +14,6 @@ Page({
     hour: 0,
     minute: 0,
     second: 0,
-    millisecond: 0,
     timecount: '00:00:00'
   },
 
@@ -26,22 +27,17 @@ Page({
       hour: 0,
       minute: 0,
       second: 0,
-      millisecond: 0,
     })
-    intt = setInterval(function () { that.timer() }, 50);
+    intt = setInterval(() => {
+      that.timer()
+    }, 1000)
   },
 
   timer: function () {
     var that = this;
     that.setData({
-      millisecond: that.data.millisecond + 5
+      second: that.data.second + 1
     })
-    if (that.data.millisecond >= 100) {
-      that.setData({
-        millisecond: 0,
-        second: that.data.second + 1
-      })
-    }
     if (that.data.second >= 60) {
       that.setData({
         second: 0,
@@ -104,31 +100,24 @@ Page({
     wx.getStorage({
       key: 'userId',
       success(res) {
-        wx.request({
-          url: 'http://localhost:8080/fan-api/order/add',
-          data: {
-            fanId: that.data.fanInfo.fanId,
-            userId: res.data,
-            beginTime: that.data.beginTime,
-            endTime: endTime,
-            sum: sum
-          },
-          success(res) {
-            if (res.data.code !== 1000) {
-              return wx.showToast({
-                title: '请充值'
-              })
-            }
-            wx.reLaunch({
-              url: '../index/index'
+        wxRequest('order/add', {
+          fanId: that.data.fanInfo.fanId,
+          userId: res.data,
+          beginTime: that.data.beginTime,
+          endTime: endTime,
+          sum: sum
+        }, (res) => {
+          if (res.data.code !== 1000) {
+            return wx.showToast({
+              title: '请充值'
             })
           }
+          wx.reLaunch({
+            url: '../index/index'
+          })
         })
       }
     })
-
-
-
   },
 
   /**

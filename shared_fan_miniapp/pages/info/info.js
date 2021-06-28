@@ -1,3 +1,5 @@
+const { wxRequest } = require("../../utils/util")
+
 // pages/info/info.js
 Page({
 
@@ -32,8 +34,7 @@ Page({
    */
   logout: function () {
     let that = this
-    wx.removeStorage({
-      key: 'userId',
+    wx.clearStorage({
       success() {
         that.checkAccount()
       }
@@ -83,16 +84,10 @@ Page({
     wx.getStorage({
       key: 'userId',
       success(res) {
-        wx.request({
-          url: 'http://localhost:8080/fan-api/user/info',
-          data: {
-            userId: res.data
-          },
-          success(res) {
-            that.setData({
-              userInfo: res.data.data
-            })
-          }
+        wxRequest('user/info', { userId: res.data }, (res) => {
+          that.setData({
+            userInfo: res.data.data
+          })
         })
       }
     })

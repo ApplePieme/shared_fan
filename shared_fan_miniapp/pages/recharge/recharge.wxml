@@ -1,6 +1,6 @@
 <!-- pages/recharge/recharge.wxml -->
 <view class="main">
-    <form bindsubmit="formSubmit">
+    <form bindsubmit="formSubmit" rules="{{rules}}" models="{{assetsForm}}">
         <view class="page-section">
             <view class="page-section-title">充值金额</view>
             <view class="weui-cells weui-cells_after-title">
